@@ -1,0 +1,5 @@
+.#*
+*.pyc
+test.csv
+.coverage
+.env
