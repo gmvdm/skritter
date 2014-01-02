@@ -1,6 +1,27 @@
-from distutils.core import setup
+#!/usr/bin/env python
 
-setup(name='skritter',
-      version='1.0',
-      packages=['skritter'],
+import skritter
+
+
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+
+packages = [
+    'skritter',
+    ]
+
+
+requires = []
+
+
+setup(
+    name='skritter',
+    version=skritter.__version__,
+    author='Geoff van der Meer',
+    author_email='gmwils@gmail.com',
+    packages=packages,
+    install_requires=requires,
     )

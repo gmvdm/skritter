@@ -3,3 +3,4 @@
 test.csv
 .coverage
 .env
+build
