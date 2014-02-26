@@ -37,14 +37,22 @@ def get_vocabs_for_query(session, query, fields=None, limit=1):
 
 
 def get_ids_for_words(session, new_words):
+    '''Given a list of words, return Skritter ids for those words, and words not found'''
     ids = set()
+    unknown_words = set()
 
     for word in new_words:
         vocabs = get_vocabs_for_query(session, word, 'id,style,lang,writing')
+        id_found = False
+
         for vocab in vocabs:
             # Two vocabs often come back, one with 'simp' and one with 'trad'
             # TODO(gmwils): support user preference of simp, trad & both
             if vocab['style'] == 'simp':
                 ids.add(vocab['id'])
+                id_found = True
 
-    return ids
+        if not id_found:
+            unknown_words.add(word)
+
+    return ids, unknown_words
