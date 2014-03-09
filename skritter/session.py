@@ -13,7 +13,10 @@ class Session(object):
                  session=None):
 
         # Requests session used for networks requests
-        self.session = session
+        if session is None:
+            self.session = requests.session()
+        else:
+            self.session = session
 
         # OAuth client name for this API client
         self.oauth_client_name = OAUTH_CLIENT_NAME
@@ -42,9 +45,6 @@ class Session(object):
         headers = {
             'AUTHORIZATION': credentials
             }
-
-        if self.session is None:
-            self.session = requests.session()
 
         r = self.session.get(OAUTH_TOKEN_URL, params=params, headers=headers)
         login_response = r.json()
