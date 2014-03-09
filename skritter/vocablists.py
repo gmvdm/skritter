@@ -40,6 +40,9 @@ def find_vocablist_by_name(vocablists, list_name):
     list_name = normalize(list_name)
     vocablist_id = None
 
+    if vocablists is None:
+        return vocablist_id
+
     for vocablist in vocablists:
         if list_name == normalize(vocablist['name']):
             vocablist_id = vocablist['id']
