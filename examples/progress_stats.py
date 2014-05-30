@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Download user stats from Skritter
+"""Download user stats from Skritter as a CSV file
 
-$ python example/download_stats.py
+$ python examples/progress_stats.py filename
 
 Note: requires environment variables set for OAuth client details,
       and for user authentication details.
@@ -15,8 +15,10 @@ export SKRITTER_PASSWORD='<password>'
 """
 
 import csv
+import datetime
 import os
 import skritter
+import sys
 
 OAUTH_CLIENT_NAME = os.environ.get('SKRITTER_OAUTH_CLIENT_NAME')
 OAUTH_CLIENT_SECRET = os.environ.get('SKRITTER_OAUTH_CLIENT_SECRET')
@@ -65,16 +67,26 @@ def add_details(data, obj):
     data.append(obj['studied']['all'])
 
 
-def main(username, password):
+def main(username, password, filename):
     session = skritter.session(OAUTH_CLIENT_NAME, OAUTH_CLIENT_SECRET)
     session.login(username, password)
 
-    report_monthly_stats(session, '2012-05-01', '2014-05-01', 'output.csv')
+    today = datetime.date.today()
+    days_ago = datetime.timedelta(731)  # max supported by API
+    start_date = (today - days_ago).isoformat()
+    end_date = today.isoformat()
+
+    report_monthly_stats(session, start_date, end_date, filename)
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        filename = 'output.csv'
+    else:
+        filename = sys.argv[1]
+
     # TODO(gmwils): load these from the command line
     username = os.environ.get('SKRITTER_USER', 'iamuser')
     password = os.environ.get('SKRITTER_PASSWORD', 'secret')
 
-    main(username, password)
+    main(username, password, filename)

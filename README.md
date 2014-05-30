@@ -26,8 +26,9 @@ Get a list of vocabulary lists.
 
 ```
 
-## Example client
+## Examples
 
+### Upload a word list
 Takes a list of Chinese words, and creates or updates a Skritter list for
 study.
 
@@ -36,5 +37,12 @@ $ export SKRITTER_OAUTH_CLIENT_NAME='<client name>'
 $ export SKRITTER_OAUTH_CLIENT_SECRET='<client secret>'
 $ export SKRITTER_USER='<username>''
 $ export SKRITTER_PASSWORD='<password>'
-$ python example/client.py 'List title' exmaple/sample.csv
+$ python examples/upload_list.py 'List title' examples/sample.csv
+```
+
+### Download user progress statistics
+Download details of the user's progress to a csv file.
+
+```shell
+$ python examples/progress_stats.py monthly_stats.csv
 ```
