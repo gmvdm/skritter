@@ -48,7 +48,7 @@ def get_ids_for_words(session, new_words):
         for vocab in vocabs:
             # Two vocabs often come back, one with 'simp' and one with 'trad'
             # TODO(gmwils): support user preference of simp, trad & both
-            if vocab['style'] == 'simp':
+            if vocab['style'] in ['simp', 'both']:
                 ids.add(vocab['id'])
                 id_found = True
 
