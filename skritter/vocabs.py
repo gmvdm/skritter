@@ -23,7 +23,7 @@ def get_vocabs_for_ids(session, vocab_ids, fields=None, batch=50):
         params['ids'] = '|'.join(subset)
 
         response = session.get(SKRITTER_VOCABS_URL, params=params)
-        if response.status_code == 200:
+        if response is not None:
             vocabs += response.get('Vocabs')
 
         to_fetch = to_fetch[batch:]

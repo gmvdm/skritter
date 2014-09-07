@@ -52,9 +52,11 @@ class Session(object):
         self.set_authorization_header(login_response.get('access_token', None))
 
     def get(self, url, **kwargs):
-        # TODO(gmwils): error handling on get requests
         response = self.session.get(url, **kwargs)
-        return response.json()
+        if response.status_code >= 200 and response.status_code < 300:
+            return response.json()
+
+        return None
 
     def post(self, url, data=None, **kwargs):
         return self.session.post(url, data, **kwargs)
