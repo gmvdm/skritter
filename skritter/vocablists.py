@@ -72,10 +72,10 @@ def get_vocablist_vocab_ids(s, vocablist):
     return vocab_ids
 
 
-def get_vocablist_words(s, vocablist):
+def get_vocablist_words(s, vocablist, batch=40):
     logger.debug('get words for skritter list id: %s', vocablist.get('id', 'no-list'))
     vocab_ids = get_vocablist_vocab_ids(s, vocablist)
-    vocabs = get_vocabs_for_ids(s, vocab_ids, 'id,writing')
+    vocabs = get_vocabs_for_ids(s, vocab_ids, 'id,writing', batch)
 
     words = set()
     for entry in vocabs:
