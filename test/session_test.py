@@ -43,6 +43,7 @@ class TestSessionVerbs(unittest.TestCase):
         self.session = Session('client', 'client_secret', self.mock_session)
 
     def test_get(self):
+        self.mock_response.status_code = 200
         self.mock_session.get.return_value = self.mock_response
 
         self.session.get('/test_url')
