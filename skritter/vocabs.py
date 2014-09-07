@@ -3,7 +3,7 @@
 SKRITTER_VOCABS_URL = 'http://www.skritter.com/api/v0/vocabs'
 
 
-def get_vocabs_for_ids(session, vocab_ids, fields=None):
+def get_vocabs_for_ids(session, vocab_ids, fields=None, batch=50):
     vocabs = []
     params = {}
     if fields:
@@ -12,7 +12,7 @@ def get_vocabs_for_ids(session, vocab_ids, fields=None):
     to_fetch = list(vocab_ids)
 
     while to_fetch:
-        subset = to_fetch[:50]
+        subset = to_fetch[:batch]
         params['ids'] = '|'.join(subset)
 
         response = session.get(SKRITTER_VOCABS_URL, params=params)
