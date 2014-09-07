@@ -5,6 +5,11 @@ SKRITTER_VOCABLIST_URL = 'http://www.skritter.com/api/v0/vocablists'
 from .utils import normalize
 from .vocabs import get_vocabs_for_ids
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 def create_vocablist(s, vocablist_name, vocablist_desc=None,
                      study_mode='not studying'):
@@ -68,6 +73,7 @@ def get_vocablist_vocab_ids(s, vocablist):
 
 
 def get_vocablist_words(s, vocablist):
+    logger.debug('get words for skritter list id: %s', vocablist.get('id', 'no-list'))
     vocab_ids = get_vocablist_vocab_ids(s, vocablist)
     vocabs = get_vocabs_for_ids(s, vocab_ids, 'id,writing')
 

@@ -2,8 +2,15 @@
 
 SKRITTER_VOCABS_URL = 'http://www.skritter.com/api/v0/vocabs'
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 def get_vocabs_for_ids(session, vocab_ids, fields=None, batch=50):
+    logger.debug('get %d vocabs with fields "%s" in batches of %d',
+                 len(vocab_ids), fields, batch)
     vocabs = []
     params = {}
     if fields:
