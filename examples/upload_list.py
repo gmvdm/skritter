@@ -107,7 +107,7 @@ def main(user, password, list_name, filename):
     unique_new_words = set(new_words)
 
     print 'Getting ids for %d new words to be added' % len(unique_new_words)
-    new_word_ids = skritter.get_ids_for_words(session, unique_new_words)
+    new_word_ids, unknown_ids = skritter.get_ids_for_words(session, unique_new_words)
 
     print 'Adding %d unique word ids to %s' % (len(new_word_ids), vocablist['name'])
     add_word_ids_to_vocablist(session, vocablist, new_word_ids)
