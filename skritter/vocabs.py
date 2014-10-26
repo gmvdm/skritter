@@ -57,6 +57,10 @@ def get_ids_for_words(session, new_words):
         vocabs = get_vocabs_for_query(session, word, 'id,style,lang,writing')
         id_found = False
 
+        if vocabs is None:
+            unknown_words.add(word)
+            continue
+
         for vocab in vocabs:
             # Two vocabs often come back, one with 'simp' and one with 'trad'
             # TODO(gmwils): support user preference of simp, trad & both
