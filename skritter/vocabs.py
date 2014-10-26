@@ -44,7 +44,7 @@ def get_vocabs_for_query(session, query, fields=None, limit=1):
     if response:
         return response.get('Vocabs')
     else:
-        logger.error('Unable to retrieve vocabs for query: %s', query)
+        logger.error('Unable to retrieve vocabs for query: %s', query.encode('utf-8'))
         return None
 
 
