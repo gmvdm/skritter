@@ -2,9 +2,11 @@ from base64 import b64encode
 from .exceptions import ConnectionError
 
 import json
+import logging
 import requests
 
 OAUTH_TOKEN_URL = 'https://www.skritter.com/api/v0/oauth2/token'
+logger = logging.getLogger(__name__)
 
 
 class Session(object):
@@ -57,6 +59,7 @@ class Session(object):
         if response.status_code >= 200 and response.status_code < 300:
             return response.json()
 
+        logger.warning('Unable to get: %s, status: %d', url, response.status_code)
         return None
 
     def post(self, url, data=None, **kwargs):
