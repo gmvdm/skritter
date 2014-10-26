@@ -41,7 +41,11 @@ def get_vocabs_for_query(session, query, fields=None, limit=1):
 
     response = session.get(SKRITTER_VOCABS_URL, params=params)
 
-    return response.get('Vocabs')
+    if response:
+        return response.get('Vocabs')
+    else:
+        logger.error('Unable to retrieve vocabs for query: %s', query)
+        return None
 
 
 def get_ids_for_words(session, new_words):
