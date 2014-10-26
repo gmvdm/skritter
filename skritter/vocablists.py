@@ -67,7 +67,7 @@ def get_vocablist_details(s, list_id):
     if response:
         return response.get('VocabList', None)
     else:
-        logger.error('Unable to get vocablist details for list: %d', list_id)
+        logger.error('Unable to get vocablist details for list: %s', list_id)
         return None
 
 
