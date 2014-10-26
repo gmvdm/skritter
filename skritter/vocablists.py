@@ -37,7 +37,11 @@ def get_vocablists(s):
         }
     response = s.get(SKRITTER_VOCABLIST_URL, params=params)
 
-    return response.get('VocabLists', None)
+    if response:
+        return response.get('VocabLists', None)
+    else:
+        logger.error('Unable to get vocablists from Skritter')
+        return None
 
 
 def find_vocablist_by_name(vocablists, list_name):
