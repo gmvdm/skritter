@@ -53,6 +53,7 @@ class Session(object):
 
     def get(self, url, **kwargs):
         response = self.session.get(url, **kwargs)
+
         if response.status_code >= 200 and response.status_code < 300:
             return response.json()
 
