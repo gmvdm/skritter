@@ -64,7 +64,11 @@ def get_vocablist_details(s, list_id):
     vocablist_url = '%s/%s' % (SKRITTER_VOCABLIST_URL, list_id)
     response = s.get(vocablist_url)
 
-    return response.get('VocabList', None)
+    if response:
+        return response.get('VocabList', None)
+    else:
+        logger.error('Unable to get vocablist details for list: %d', list_id)
+        return None
 
 
 def get_vocablist_vocab_ids(s, vocablist):
